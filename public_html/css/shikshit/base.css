@@ -175,7 +175,7 @@ p {
 /* Section Header Typography */
 .shikshit-section-header {
   text-align: left;
-  margin-bottom: 48px;
+  margin-bottom: clamp(24px, 3vw, 36px);
   position: relative;
 }
 

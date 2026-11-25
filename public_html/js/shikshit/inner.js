@@ -671,38 +671,61 @@
      ------------------------------------------------------------------------ */
   function initDonateAnimations() {
     if (!document.body.classList.contains('page-donate')) return;
-    if (prefersReducedMotion) return;
+    if (prefersReducedMotion) {
+      document.querySelectorAll('.intervention-card').forEach(c => c.classList.add('is-inview'));
+      return;
+    }
+
+    const cards = document.querySelectorAll('.intervention-card');
+    if (cards.length) {
+      const cardObserver = new IntersectionObserver(
+        function (entries, observer) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-inview');
+              setTimeout(function () {
+                if (entry.target.classList.contains('is-inview')) {
+                  entry.target.style.transitionDelay = '0s';
+                }
+              }, 900);
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+      );
+
+      cards.forEach(function (card) {
+        cardObserver.observe(card);
+      });
+    }
 
     const targets = document.querySelectorAll(
       'body.page-donate #donate-form .grid.grid-cols-2 > div, ' +
       'body.page-donate #donate-form .bg-white, ' +
-      'body.page-donate .intervention-card, ' +
       'body.page-donate .py-16.lg\\:py-24.bg-white > div'
     );
 
-    if (!targets.length) return;
+    if (targets.length) {
+      const donateObserver = new IntersectionObserver(
+        function (entries, observer) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+      );
 
-    const donateObserver = new IntersectionObserver(
-      function (entries, observer) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      {
-        threshold: 0.1,
-        rootMargin: '0px 0px -40px 0px'
-      }
-    );
-
-    targets.forEach(function (el, idx) {
-      el.classList.add('scroll-reveal-item');
-      const delay = (idx % 4) * 0.07;
-      el.style.transitionDelay = delay + 's';
-      donateObserver.observe(el);
-    });
+      targets.forEach(function (el, idx) {
+        el.classList.add('scroll-reveal-ready');
+        const delay = (idx % 4) * 0.07;
+        el.style.transitionDelay = delay + 's';
+        donateObserver.observe(el);
+      });
+    }
 
     // Smooth scroll for hero CTA button
     const heroBtn = document.querySelector('body.page-donate .hero-gradient a[href*="donate-form"]');
@@ -720,6 +743,69 @@
   /* ------------------------------------------------------------------------
      Initialize on DOM Ready
      ------------------------------------------------------------------------ */
+
+  /* ------------------------------------------------------------------------
+     Unified Mobile Menu Controller across all inner pages
+     ------------------------------------------------------------------------ */
+  function toggleMobileMenu(e) {
+    if (e && typeof e.preventDefault === 'function') {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    const mobileMenu = document.getElementById('mobileMenu');
+    const toggleButton = document.querySelector('.mobile-menu-toggle');
+    if (!mobileMenu) return;
+
+    const isActive = mobileMenu.classList.contains('active');
+    if (isActive) {
+      mobileMenu.classList.remove('active');
+      if (toggleButton) {
+        toggleButton.classList.remove('active');
+        toggleButton.setAttribute('aria-expanded', 'false');
+      }
+      document.body.style.overflow = '';
+    } else {
+      mobileMenu.classList.add('active');
+      if (toggleButton) {
+        toggleButton.classList.add('active');
+        toggleButton.setAttribute('aria-expanded', 'true');
+      }
+    }
+  }
+
+  window.toggleMobileMenu = toggleMobileMenu;
+
+  // Global listeners for closing mobile menu on click-outside and Escape key
+  document.addEventListener('click', function (e) {
+    const mobileMenu = document.getElementById('mobileMenu');
+    const toggleButton = document.querySelector('.mobile-menu-toggle');
+    if (mobileMenu && mobileMenu.classList.contains('active')) {
+      if (!mobileMenu.contains(e.target) && (!toggleButton || !toggleButton.contains(e.target))) {
+        mobileMenu.classList.remove('active');
+        if (toggleButton) {
+          toggleButton.classList.remove('active');
+          toggleButton.setAttribute('aria-expanded', 'false');
+        }
+        document.body.style.overflow = '';
+      }
+    }
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      const mobileMenu = document.getElementById('mobileMenu');
+      const toggleButton = document.querySelector('.mobile-menu-toggle');
+      if (mobileMenu && mobileMenu.classList.contains('active')) {
+        mobileMenu.classList.remove('active');
+        if (toggleButton) {
+          toggleButton.classList.remove('active');
+          toggleButton.setAttribute('aria-expanded', 'false');
+        }
+        document.body.style.overflow = '';
+      }
+    }
+  });
+
   function initAll() {
     initProgressBar();
     initSectionIndex();

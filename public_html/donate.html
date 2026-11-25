@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <link rel="icon" type="image/webp" href="images/sikshitlogo.webp">
-  <link rel="apple-touch-icon" href="images/sikshitlogo.webp">
+  <!-- Official Shikshit Favicon -->
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -89,88 +89,73 @@
   }
   </script>
 
-    <!-- Tailwind CSS via CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          screens: {
-            xs: "480px",
-            sm: "640px",
-            md: "768px",
-            lg: "1024px",
-            xl: "1280px",
-            "2xl": "1536px",
-          },
-          extend: {
-            height: {
-              120: "30rem",
-              140: "35rem",
-            },
-            animation: {
-              float: "float 6s ease-in-out infinite",
-              "pulse-slow": "pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite",
-              "bounce-slow": "bounce 2s infinite",
-            },
-          },
-        },
-      };
-    </script>
-
-    <!-- Custom CSS -->
+    <!-- Shikshit Design System Stylesheets -->
     <link rel="stylesheet" href="css/shikshit/tokens.css">
     <link rel="stylesheet" href="css/shikshit/base.css">
     <link rel="stylesheet" href="css/shikshit/components.css">
     <link rel="stylesheet" href="css/shikshit/donate.css">
-    <link rel="stylesheet" href="css/shikshit/footer.css">
 
-    <!-- Load script.js early to ensure includeHTML is available -->
-    <script src="js/script.js" defer></script>
-    <script src="js/scholarship-animations.js" defer></script>
-
-    <!-- Razorpay Payment Gateway -->
-    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-    <script src="js/payment-gateway.js" defer></script>
-
-    <!-- Mobile Menu Toggle Function -->
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
-      // Global function to toggle mobile menu - must be defined before HTML uses it
-      function toggleMobileMenu(e) {
-        if (e) {
-          e.preventDefault();
-          e.stopPropagation();
+    // Global function to toggle mobile menu
+    function toggleMobileMenu(e) {
+      if (e && typeof e.preventDefault === 'function') {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      const mobileMenu = document.getElementById("mobileMenu");
+      const toggleButton = document.querySelector(".mobile-menu-toggle");
+      if (!mobileMenu) return;
+
+      const isActive = mobileMenu.classList.contains("active");
+      if (isActive) {
+        mobileMenu.classList.remove("active");
+        if (toggleButton) {
+          toggleButton.classList.remove("active");
+          toggleButton.setAttribute("aria-expanded", "false");
         }
-
-        console.log("Toggle mobile menu function called");
-
-        // Find the mobile menu and toggle button
-        const mobileMenu = document.getElementById("mobileMenu");
-        const toggleButton = document.querySelector(".mobile-menu-toggle");
-
-        if (!mobileMenu) {
-          console.error("Mobile menu not found");
-          return;
-        }
-
-        // Toggle the active class on both menu and button
-        const isActive = mobileMenu.classList.contains("active");
-
-        if (isActive) {
-          // Hide menu
-          mobileMenu.classList.remove("active");
-          if (toggleButton) toggleButton.classList.remove("active");
-          console.log("Mobile menu hidden");
-        } else {
-          // Show menu
-          mobileMenu.classList.add("active");
-          if (toggleButton) toggleButton.classList.add("active");
-          console.log("Mobile menu shown");
+        document.body.style.overflow = "";
+      } else {
+        mobileMenu.classList.add("active");
+        if (toggleButton) {
+          toggleButton.classList.add("active");
+          toggleButton.setAttribute("aria-expanded", "true");
         }
       }
+    }
+    window.toggleMobileMenu = toggleMobileMenu;
 
-      // Make function globally available
-      window.toggleMobileMenu = toggleMobileMenu;
-    </script>
+    document.addEventListener("click", function(e) {
+      const mobileMenu = document.getElementById("mobileMenu");
+      const toggleButton = document.querySelector(".mobile-menu-toggle");
+      if (mobileMenu && mobileMenu.classList.contains("active")) {
+        if (!mobileMenu.contains(e.target) && (!toggleButton || !toggleButton.contains(e.target))) {
+          mobileMenu.classList.remove("active");
+          if (toggleButton) {
+            toggleButton.classList.remove("active");
+            toggleButton.setAttribute("aria-expanded", "false");
+          }
+          document.body.style.overflow = "";
+        }
+      }
+    });
+
+    document.addEventListener("keydown", function(e) {
+      if (e.key === "Escape") {
+        const mobileMenu = document.getElementById("mobileMenu");
+        const toggleButton = document.querySelector(".mobile-menu-toggle");
+        if (mobileMenu && mobileMenu.classList.contains("active")) {
+          mobileMenu.classList.remove("active");
+          if (toggleButton) {
+            toggleButton.classList.remove("active");
+            toggleButton.setAttribute("aria-expanded", "false");
+          }
+          document.body.style.overflow = "";
+        }
+      }
+    });
+  </script>
 
     <style>
       /* Hero Section Styles */
@@ -640,43 +625,35 @@
         background-clip: text;
       }
 
-      /* Staggered Animation */
+      /* Staggered Mouse-Scroll Animation */
       .intervention-card {
         opacity: 0;
-        transform: translateY(30px);
-        animation: fadeInUp 0.6s ease forwards;
+        transform: translateY(46px) scale(0.96);
+        transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+                    transform 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+                    box-shadow 0.38s cubic-bezier(0.16, 1, 0.3, 1),
+                    border-color 0.32s ease !important;
+        will-change: transform, opacity;
       }
 
-      .intervention-card:nth-child(1) {
-        animation-delay: 0.1s;
-      }
-      .intervention-card:nth-child(2) {
-        animation-delay: 0.2s;
-      }
-      .intervention-card:nth-child(3) {
-        animation-delay: 0.3s;
-      }
-      .intervention-card:nth-child(4) {
-        animation-delay: 0.4s;
-      }
-      .intervention-card:nth-child(5) {
-        animation-delay: 0.5s;
-      }
-      .intervention-card:nth-child(6) {
-        animation-delay: 0.6s;
-      }
-      .intervention-card:nth-child(7) {
-        animation-delay: 0.7s;
-      }
-      .intervention-card:nth-child(8) {
-        animation-delay: 0.8s;
+      .intervention-card.is-inview {
+        opacity: 1 !important;
+        transform: translateY(var(--scroll-shift, 0px)) scale(1) !important;
       }
 
-      @keyframes fadeInUp {
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
+      .intervention-card:nth-child(1) { transition-delay: 0.04s; }
+      .intervention-card:nth-child(2) { transition-delay: 0.12s; }
+      .intervention-card:nth-child(3) { transition-delay: 0.20s; }
+      .intervention-card:nth-child(4) { transition-delay: 0.28s; }
+      .intervention-card:nth-child(5) { transition-delay: 0.16s; }
+      .intervention-card:nth-child(6) { transition-delay: 0.24s; }
+      .intervention-card:nth-child(7) { transition-delay: 0.32s; }
+      .intervention-card:nth-child(8) { transition-delay: 0.40s; }
+
+      .intervention-card.is-inview:hover {
+        transform: translateY(-10px) scale(1.02) !important;
+        box-shadow: 0 24px 54px rgba(124, 58, 237, 0.18), 0 6px 18px rgba(11, 11, 59, 0.04) !important;
+        border-color: rgba(124, 58, 237, 0.36) !important;
       }
 
       /* Floating Background Elements */
@@ -1533,9 +1510,10 @@
         transform: scale(1.05);
       }
     </style>
-  <style>body.page-donate { padding-top: 0 !important; } body.page-donate .shikshit-header { position: fixed; top: 18px; left: 0; right: 0; }</style>
+  
 
   
+  <link rel="stylesheet" href="/css/responsiveness-spacing-audit.css">
 </head>
   <body class="page-donate">
   <!-- Ambient Background Layer (Theme: "Light of Learning") -->
@@ -1553,66 +1531,68 @@
   </div>
     <!-- Navbar -->
     <header class="shikshit-header" role="banner">
-      <nav class="shikshit-navbar" aria-label="Main Navigation">
+      <nav class="shikshit-navbar navbar" aria-label="Main Navigation">
         <!-- Brand Logo (Existing logo file unchanged) -->
-        <a href="index.html" class="shikshit-brand" aria-label="Shikshit Homepage">
-          <img src="images/sikshitlogo.webp" alt="Shikshit Logo - Empowering Education & Scholarships" class="shikshit-logo">
+        <a href="index.html" class="shikshit-brand navbar-brand" aria-label="Shikshit Homepage">
+          <img src="images/sikshitlogo.webp" alt="Shikshit Logo - Empowering Education & Scholarships" class="shikshit-logo navbar-logo-enlarged">
         </a>
 
         <!-- Main Desktop Navigation -->
-        <ul class="shikshit-nav-menu">
-          <li>
-            <a href="ns-mas.html" class="shikshit-nav-link">NS-MAS</a>
+        <ul class="shikshit-nav-menu navbar-nav">
+          <li class="nav-item">
+            <a href="ns-mas.html" class="shikshit-nav-link nav-link">NS-MAS</a>
           </li>
-          <li>
-            <a href="product-services.html" class="shikshit-nav-link">Products and Services</a>
+          <li class="nav-item">
+            <a href="product-services.html" class="shikshit-nav-link nav-link">Products and Services</a>
           </li>
-          <li>
-            <a href="registration.html" class="shikshit-nav-link">Apply Now</a>
+          <li class="nav-item">
+            <a href="registration.html" class="shikshit-nav-link nav-link">Apply Now</a>
           </li>
-          <li>
-            <a href="careers.html" class="shikshit-nav-link">Career</a>
+          <li class="nav-item">
+            <a href="careers.html" class="shikshit-nav-link nav-link">Career</a>
           </li>
-          <li class="nav-item"><a href="blogs.html" class="shikshit-nav-link">Blogs</a></li>
+          <li class="nav-item">
+            <a href="blogs.html" class="shikshit-nav-link nav-link">Blogs</a>
+          </li>
         </ul>
 
         <!-- CTA Buttons -->
-        <div class="shikshit-nav-actions">
+        <div class="shikshit-nav-actions cta-buttons">
           <a href="become-a-member.html" class="btn-pill btn-secondary-white btn-partner">
             Become a Member
           </a>
-          <a href="donate.html" class="btn-pill btn-primary-gradient btn-donate">
+          <a href="donate.html" class="btn-pill btn-primary-gradient btn-donate active">
             Donate Us
           </a>
         </div>
 
         <!-- Mobile Menu Toggle Button (Preserves toggleMobileMenu hook) -->
-        <button type="button" class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu" aria-expanded="false">
+        <button type="button" class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobileMenu">
           <span class="hamburger-line"></span>
           <span class="hamburger-line"></span>
           <span class="hamburger-line"></span>
         </button>
 
-        <!-- Mobile Menu Dropdown (Preserves #mobileMenu id and exact 5 links) -->
+        <!-- Mobile Menu Dropdown -->
         <div class="mobile-menu" id="mobileMenu">
           <ul class="mobile-nav">
-            <li>
+            <li class="nav-item">
               <a href="ns-mas.html" class="nav-link">NS-MAS</a>
             </li>
-            <li>
+            <li class="nav-item">
               <a href="product-services.html" class="nav-link">Products and Services</a>
             </li>
-            <li>
+            <li class="nav-item">
               <a href="registration.html" class="nav-link">Apply Now</a>
             </li>
-            <li>
+            <li class="nav-item">
               <a href="careers.html" class="nav-link">Career</a>
             </li>
             <li class="nav-item"><a href="blogs.html" class="nav-link">Blogs</a></li>
-            <li style="margin-top: 6px;">
+            <li class="nav-item" style="margin-top: 6px;">
               <a href="become-a-member.html" class="btn-pill btn-secondary-white" style="width: 100%; text-align: center;">Become a Member</a>
             </li>
-            <li>
+            <li class="nav-item">
               <a href="donate.html" class="btn-pill btn-primary-gradient" style="width: 100%; text-align: center;">Donate Us</a>
             </li>
           </ul>
@@ -2664,6 +2644,84 @@
           });
         });
       });
+
+      // Mouse-Scroll Triggered Animations for Intervention Cards
+      (function() {
+        const cards = document.querySelectorAll('.intervention-card');
+        if (!cards.length) return;
+
+        // 1. Entrance on Mouse Scroll using IntersectionObserver
+        const observer = new IntersectionObserver((entries, obs) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-inview');
+              setTimeout(() => {
+                if (entry.target.classList.contains('is-inview')) {
+                  entry.target.style.transitionDelay = '0s';
+                }
+              }, 900);
+              obs.unobserve(entry.target);
+            }
+          });
+        }, {
+          threshold: 0.06,
+          rootMargin: '0px 0px -15px 0px'
+        });
+
+        cards.forEach(card => observer.observe(card));
+
+        // 2. Dynamic Mouse-Scroll Parallax / Floating Depth
+        let scrollTicking = false;
+        function updateScrollParallax() {
+          const section = document.querySelector('.interventions-section') || document.querySelector('.interventions-grid');
+          if (!section) return;
+          const rect = section.getBoundingClientRect();
+          const inView = rect.top < window.innerHeight && rect.bottom > 0;
+          if (!inView) return;
+
+          const progress = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
+          const baseOffset = (progress - 0.5) * 22; // subtle float
+
+          cards.forEach((card, idx) => {
+            if (!card.classList.contains('is-inview')) return;
+            const drift = (idx % 2 === 0 ? baseOffset * 0.75 : -baseOffset * 0.75);
+            card.style.setProperty('--scroll-shift', `${drift.toFixed(2)}px`);
+          });
+        }
+
+        window.addEventListener('scroll', () => {
+          if (!scrollTicking) {
+            requestAnimationFrame(() => {
+              updateScrollParallax();
+              scrollTicking = false;
+            });
+            scrollTicking = true;
+          }
+        }, { passive: true });
+
+        // 3. Desktop 3D Interactive Mouse Tilt
+        if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+          cards.forEach(card => {
+            card.addEventListener('pointermove', e => {
+              if (!card.classList.contains('is-inview')) return;
+              const r = card.getBoundingClientRect();
+              const x = e.clientX - r.left;
+              const y = e.clientY - r.top;
+              const cx = r.width / 2;
+              const cy = r.height / 2;
+              const rx = ((y - cy) / cy) * -5.5;
+              const ry = ((x - cx) / cx) * 5.5;
+              card.style.transform = `perspective(900px) rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg) translateY(-10px) scale(1.02)`;
+            });
+
+            card.addEventListener('pointerleave', () => {
+              if (card.classList.contains('is-inview')) {
+                card.style.transform = '';
+              }
+            });
+          });
+        }
+      })();
     </script>
     <script src="js/shikshit/inner.js"></script>
   <!-- Centralized Shikshit Footer Component Loader -->

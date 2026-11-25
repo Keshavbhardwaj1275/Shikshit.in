@@ -64,7 +64,7 @@
   /* Layout Rhythm */
   --container-max: 1200px;
   --container-padding: 24px;
-  --section-rhythm: 104px;
+  --section-rhythm: clamp(38px, 4.5vw, 54px);
 }
 
 

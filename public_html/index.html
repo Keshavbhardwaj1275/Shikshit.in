@@ -33,7 +33,8 @@ shikshit academic development services,shikshit training and mentorship,
   <meta name="twitter:image" content="https://www.shikshit.in/images/sikshitlogo.webp">
   <meta name="twitter:url" content="https://www.shikshit.in/">
 
-  <link rel="icon" type="image/webp" href="images/sikshitlogo.webp">
+  <!-- Official Shikshit Favicon -->
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
 
   <!-- Google Fonts: Plus Jakarta Sans (Primary font) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -106,6 +107,7 @@ shikshit academic development services,shikshit training and mentorship,
   <link rel="stylesheet" href="css/shikshit/components.css">
   <link rel="stylesheet" href="css/shikshit/pages.css">
   <link rel="stylesheet" href="css/shikshit/footer.css">
+  <link rel="stylesheet" href="css/responsiveness-spacing-audit.css">
 </head>
 
 <body class="shikshit-editorial">
@@ -174,7 +176,7 @@ shikshit academic development services,shikshit training and mentorship,
         </div>
 
         <!-- Mobile Menu Toggle Button (Preserves toggleMobileMenu hook) -->
-        <button type="button" class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu" aria-expanded="false">
+        <button type="button" class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobileMenu">
           <span class="hamburger-line"></span>
           <span class="hamburger-line"></span>
           <span class="hamburger-line"></span>
@@ -239,7 +241,7 @@ shikshit academic development services,shikshit training and mentorship,
           <!-- Polaroid 1: Raised ₹2.5Cr+ -->
           <figure class="pc p1" data-d="16">
             <div class="pi">
-              <span class="sk">₹2.5Cr+</span>
+              <span class="sk counter" data-counter-prefix="₹" data-counter-target="2.5" data-counter-suffix="Cr+">₹2.5Cr+</span>
               <div class="pi-img-frame">
                 <img src="images/vision.webp" alt="Smiling students" loading="eager">
               </div>
@@ -251,7 +253,7 @@ shikshit academic development services,shikshit training and mentorship,
           <!-- Polaroid 2: Students Helped 500+ -->
           <figure class="pc p2" data-d="26">
             <div class="pi">
-              <span class="sk">500+</span>
+              <span class="sk counter" data-counter-target="500" data-counter-suffix="+">500+</span>
               <div class="pi-img-frame">
                 <img src="images/siksha.webp" alt="Students in a science lab" loading="eager">
               </div>
@@ -262,7 +264,7 @@ shikshit academic development services,shikshit training and mentorship,
           <!-- Polaroid 3: Institutions 50+ -->
           <figure class="pc p3" data-d="20">
             <div class="pi">
-              <span class="sk">50+</span>
+              <span class="sk counter" data-counter-target="50" data-counter-suffix="+">50+</span>
               <div class="pi-img-frame">
                 <img src="images/opp1.webp" alt="Students with certificates" loading="eager">
               </div>
@@ -336,7 +338,7 @@ shikshit academic development services,shikshit training and mentorship,
       <!-- ====================================================================
            3. TWO FEATURE CARDS: NS-MAS Gradient Card + Support Education Card
            ==================================================================== -->
-      <section class="shikshit-section" style="padding-top: 10px;">
+      <section class="shikshit-section">
         <div class="shikshit-container">
           <div class="feature-cards-grid">
 
@@ -390,15 +392,15 @@ shikshit academic development services,shikshit training and mentorship,
 
                 <div class="support-impact-tiles">
                   <div class="support-impact-tile">
-                    <div class="support-impact-tile-num">₹2.5Cr+</div>
+                    <div class="support-impact-tile-num counter" data-counter-prefix="₹" data-counter-target="2.5" data-counter-suffix="Cr+">₹2.5Cr+</div>
                     <div class="support-impact-tile-lbl">Raised</div>
                   </div>
                   <div class="support-impact-tile">
-                    <div class="support-impact-tile-num">500+</div>
+                    <div class="support-impact-tile-num counter" data-counter-target="500" data-counter-suffix="+">500+</div>
                     <div class="support-impact-tile-lbl">Students</div>
                   </div>
                   <div class="support-impact-tile">
-                    <div class="support-impact-tile-num">50+</div>
+                    <div class="support-impact-tile-num counter" data-counter-target="50" data-counter-suffix="+">50+</div>
                     <div class="support-impact-tile-lbl">Institutions</div>
                   </div>
                 </div>
@@ -734,7 +736,7 @@ shikshit academic development services,shikshit training and mentorship,
       <!-- ====================================================================
            7. ABOUT NS-MAS: Deep Violet Gradient Background with Soft Glow
            ==================================================================== -->
-      <section class="shikshit-section" style="padding-top: 20px; padding-bottom: 20px;">
+      <section class="shikshit-section">
         <div class="shikshit-container">
           <div class="nsmas-deep-section editorial-reveal ns-mas-intro-section">
             <div class="nsmas-deep-glow" aria-hidden="true"></div>
@@ -903,7 +905,7 @@ shikshit academic development services,shikshit training and mentorship,
               <div class="partner-stat-label">Active Partners</div>
             </div>
             <div class="partner-stat-col stat-card">
-              <div class="partner-stat-num counter" data-counter-target="10000" data-counter-suffix="+">10K+</div>
+              <div class="partner-stat-num counter" data-counter-target="10" data-counter-suffix="K+">10K+</div>
               <div class="partner-stat-label">Students Benefited</div>
             </div>
             <div class="partner-stat-col stat-card">
@@ -1010,21 +1012,24 @@ shikshit academic development services,shikshit training and mentorship,
 
 
       <!-- ====================================================================
-           10. OUR VIDEO ADS: 3-Column Grid of 16:9 Cards with Gradient Frame
+           10. TESTIMONIALS: Continuously Moving Seamless Video Marquee
            ==================================================================== -->
       <section class="shikshit-section video-carousel" id="video-ads">
         <div class="shikshit-container">
           <div class="shikshit-section-header editorial-reveal">
             <div class="shikshit-chip">Watch &amp; Discover 🎬</div>
-            <h2>Our Video Ads</h2>
+            <h2>Testimonials</h2>
             <p class="shikshit-section-subtitle">
               Watch real stories, program highlights, and scholarship orientation sessions.
             </p>
           </div>
+        </div>
 
-          <div class="videos-editorial-grid">
+        <!-- Continuously moving, seamless horizontal video carousel -->
+        <div class="video-carousel-container editorial-reveal" aria-label="Testimonials Carousel">
+          <div class="carousel-track video-carousel-track" data-speed="35">
             <!-- Video 1 -->
-            <div class="video-editorial-card editorial-reveal video-item">
+            <div class="video-editorial-card video-item">
               <div class="video-aspect-frame">
                 <video preload="metadata" playsinline>
                   <source src="./vid_testonomials/video3.webm" type="video/webm">
@@ -1035,7 +1040,7 @@ shikshit academic development services,shikshit training and mentorship,
             </div>
 
             <!-- Video 2 -->
-            <div class="video-editorial-card editorial-reveal video-item">
+            <div class="video-editorial-card video-item">
               <div class="video-aspect-frame">
                 <video preload="metadata" playsinline>
                   <source src="./vid_testonomials/video2.webm" type="video/webm">
@@ -1046,11 +1051,66 @@ shikshit academic development services,shikshit training and mentorship,
             </div>
 
             <!-- Video 3 -->
-            <div class="video-editorial-card editorial-reveal video-item">
+            <div class="video-editorial-card video-item">
               <div class="video-aspect-frame">
                 <video preload="metadata" playsinline>
                   <source src="./vid_testonomials/video5.webm" type="video/webm">
                   <source src="./vid_testonomials/video5.webm" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            </div>
+
+            <!-- Video 4 -->
+            <div class="video-editorial-card video-item">
+              <div class="video-aspect-frame">
+                <video preload="metadata" playsinline>
+                  <source src="./vid_testonomials/video1.webm" type="video/webm">
+                  <source src="./vid_testonomials/video1.webm" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            </div>
+
+            <!-- Video 5 -->
+            <div class="video-editorial-card video-item">
+              <div class="video-aspect-frame">
+                <video preload="metadata" playsinline>
+                  <source src="./vid_testonomials/video4.webm" type="video/webm">
+                  <source src="./vid_testonomials/video4.webm" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            </div>
+
+            <!-- Video 6 -->
+            <div class="video-editorial-card video-item">
+              <div class="video-aspect-frame">
+                <video preload="metadata" playsinline>
+                  <source src="./vid_testonomials/video6.webm" type="video/webm">
+                  <source src="./vid_testonomials/video6.webm" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            </div>
+
+            <!-- Video 7 -->
+            <div class="video-editorial-card video-item">
+              <div class="video-aspect-frame">
+                <video preload="metadata" playsinline>
+                  <source src="./vid_testonomials/video14.webm" type="video/webm">
+                  <source src="./vid_testonomials/video14.webm" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            </div>
+
+            <!-- Video 8 -->
+            <div class="video-editorial-card video-item">
+              <div class="video-aspect-frame">
+                <video preload="metadata" playsinline>
+                  <source src="./vid_testonomials/video16.webm" type="video/webm">
+                  <source src="./vid_testonomials/video16.webm" type="video/mp4">
                   Your browser does not support the video tag.
                 </video>
               </div>

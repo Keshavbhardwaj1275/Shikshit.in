@@ -2,8 +2,8 @@
 <html lang="en">
 
 <head>
-  <link rel="icon" type="image/webp" href="images/sikshitlogo.webp">
-  <link rel="apple-touch-icon" href="images/sikshitlogo.webp">
+  <!-- Official Shikshit Favicon -->
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -89,8 +89,7 @@ Career guidance services for students, Student support services India Online cer
 Professional skill development training,
 Internship support services, Career counseling for students,
 Academic guidance programs, Best education platform for students">
-    <link rel="stylesheet" href="css/sikshitnavbar.css" />
-
+    
   <!-- Google Fonts: Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -109,198 +108,67 @@ Academic guidance programs, Best education platform for students">
 
   <!-- Mobile Menu Toggle Function -->
   <script>
-    // Global function to toggle mobile menu - must be defined before HTML uses it
+    // Global function to toggle mobile menu
     function toggleMobileMenu(e) {
-      if (e) {
+      if (e && typeof e.preventDefault === 'function') {
         e.preventDefault();
         e.stopPropagation();
       }
-
-      console.log("Toggle mobile menu function called");
-
-      // Find the mobile menu and toggle button
       const mobileMenu = document.getElementById("mobileMenu");
       const toggleButton = document.querySelector(".mobile-menu-toggle");
+      if (!mobileMenu) return;
 
-      if (!mobileMenu) {
-        console.error("Mobile menu not found");
-        return;
-      }
-
-      // Toggle the active class on both menu and button
       const isActive = mobileMenu.classList.contains("active");
-
       if (isActive) {
-        // Hide menu
         mobileMenu.classList.remove("active");
-        if (toggleButton) toggleButton.classList.remove("active");
-        console.log("Mobile menu hidden");
+        if (toggleButton) {
+          toggleButton.classList.remove("active");
+          toggleButton.setAttribute("aria-expanded", "false");
+        }
+        document.body.style.overflow = "";
       } else {
-        // Show menu
         mobileMenu.classList.add("active");
-        if (toggleButton) toggleButton.classList.add("active");
-        console.log("Mobile menu shown");
+        if (toggleButton) {
+          toggleButton.classList.add("active");
+          toggleButton.setAttribute("aria-expanded", "true");
+        }
       }
     }
-
-    // Make function globally available
     window.toggleMobileMenu = toggleMobileMenu;
+
+    document.addEventListener("click", function(e) {
+      const mobileMenu = document.getElementById("mobileMenu");
+      const toggleButton = document.querySelector(".mobile-menu-toggle");
+      if (mobileMenu && mobileMenu.classList.contains("active")) {
+        if (!mobileMenu.contains(e.target) && (!toggleButton || !toggleButton.contains(e.target))) {
+          mobileMenu.classList.remove("active");
+          if (toggleButton) {
+            toggleButton.classList.remove("active");
+            toggleButton.setAttribute("aria-expanded", "false");
+          }
+          document.body.style.overflow = "";
+        }
+      }
+    });
+
+    document.addEventListener("keydown", function(e) {
+      if (e.key === "Escape") {
+        const mobileMenu = document.getElementById("mobileMenu");
+        const toggleButton = document.querySelector(".mobile-menu-toggle");
+        if (mobileMenu && mobileMenu.classList.contains("active")) {
+          mobileMenu.classList.remove("active");
+          if (toggleButton) {
+            toggleButton.classList.remove("active");
+            toggleButton.setAttribute("aria-expanded", "false");
+          }
+          document.body.style.overflow = "";
+        }
+      }
+    });
   </script>
 
   <!-- Additional Mobile Menu Debugging Styles -->
   <style>
-    /* Enhanced Mobile Menu Styles */
-    @media (max-width: 1334px) {
-      .mobile-menu-toggle {
-        display: flex !important;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        position: relative;
-        z-index: 1002;
-        background: rgba(255, 255, 255, 0.1);
-        border: 2px solid rgba(107, 70, 193, 0.3);
-        border-radius: 8px;
-        padding: 10px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        width: 44px;
-        height: 44px;
-      }
-
-      .mobile-menu-toggle:hover {
-        background: rgba(107, 70, 193, 0.15);
-        border-color: rgba(107, 70, 193, 0.5);
-        transform: scale(1.05);
-      }
-
-      .hamburger-line {
-        background-color: #6b46c1 !important;
-        width: 24px;
-        height: 3px;
-        margin: 2px 0;
-        border-radius: 2px;
-        transition: all 0.3s ease;
-      }
-
-      /* Mobile Menu Container */
-      .mobile-menu {
-        position: absolute !important;
-        top: 100% !important;
-        left: 0 !important;
-        right: 0 !important;
-        background: linear-gradient(135deg,
-            #ffffff 0%,
-            #f8fafc 100%) !important;
-        border-top: 3px solid #6b46c1 !important;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15) !important;
-        z-index: 1001 !important;
-        opacity: 0;
-        visibility: hidden;
-        transform: translateY(-10px);
-        transition: all 0.3s ease;
-        border-radius: 0 0 16px 16px;
-        overflow: hidden;
-      }
-
-      .mobile-menu.active {
-        display: block !important;
-        opacity: 1 !important;
-        visibility: visible !important;
-        transform: translateY(0);
-        max-height: 600px !important;
-      }
-
-      /* Mobile Navigation List */
-      .mobile-nav {
-        padding: 24px 20px !important;
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 12px !important;
-        list-style: none !important;
-        margin: 0 !important;
-      }
-
-      .mobile-nav .nav-item {
-        list-style: none !important;
-        margin: 0 !important;
-      }
-
-      /* Mobile Navigation Links */
-      .mobile-nav .nav-link {
-        padding: 16px 20px !important;
-        border: 2px solid #e2e8f0 !important;
-        border-radius: 12px !important;
-        text-align: center !important;
-        display: block !important;
-        text-decoration: none !important;
-        color: #374151 !important;
-        font-weight: 600 !important;
-        font-size: 16px !important;
-        transition: all 0.3s ease !important;
-        background: white !important;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .mobile-nav .nav-link::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg,
-            transparent,
-            rgba(107, 70, 193, 0.1),
-            transparent);
-        transition: left 0.5s ease;
-      }
-
-      .mobile-nav .nav-link:hover::before {
-        left: 100%;
-      }
-
-      .mobile-nav .nav-link:hover {
-        border-color: #6b46c1 !important;
-        color: #6b46c1 !important;
-        transform: translateY(-2px) !important;
-        box-shadow: 0 4px 20px rgba(107, 70, 193, 0.2) !important;
-        background: #f8fafc !important;
-      }
-
-      /* Special styling for CTA buttons in mobile */
-      .mobile-nav .btn-partner {
-        background: linear-gradient(135deg, #10b981, #059669) !important;
-        color: white !important;
-        border-color: #10b981 !important;
-        font-weight: 700 !important;
-      }
-
-      .mobile-nav .btn-partner:hover {
-        background: linear-gradient(135deg, #059669, #047857) !important;
-        border-color: #059669 !important;
-        color: white !important;
-        transform: translateY(-3px) !important;
-        box-shadow: 0 6px 25px rgba(16, 185, 129, 0.4) !important;
-      }
-
-      .mobile-nav .btn-donate {
-        background: linear-gradient(135deg, #ef4444, #dc2626) !important;
-        color: white !important;
-        border-color: #ef4444 !important;
-        font-weight: 700 !important;
-      }
-
-      .mobile-nav .btn-donate:hover {
-        background: linear-gradient(135deg, #dc2626, #b91c1c) !important;
-        border-color: #dc2626 !important;
-        color: white !important;
-        transform: translateY(-3px) !important;
-        box-shadow: 0 6px 25px rgba(239, 68, 68, 0.4) !important;
-      }
-    }
-
     /* Modern Product & Services Page Styles */
     .hero-section {
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -1443,6 +1311,7 @@ Academic guidance programs, Best education platform for students">
   <link rel="stylesheet" href="css/shikshit/footer.css">
 
   
+  <link rel="stylesheet" href="/css/responsiveness-spacing-audit.css">
 </head>
 
 <body class="shikshit-editorial page-products">
@@ -1475,7 +1344,7 @@ Academic guidance programs, Best education platform for students">
          Items: NS-MAS | Products and Services | Apply Now | Career + 2 CTAs
          ====================================================================== -->
     <header class="shikshit-header" role="banner">
-      <nav class="shikshit-navbar" aria-label="Main Navigation">
+      <nav class="shikshit-navbar navbar" aria-label="Main Navigation">
         <!-- Brand Logo (Existing logo file unchanged) -->
         <a href="index.html" class="shikshit-brand navbar-brand" aria-label="Shikshit Homepage">
           <img src="images/sikshitlogo.webp" alt="Shikshit Logo - Empowering Education & Scholarships" class="shikshit-logo navbar-logo-enlarged">
@@ -1511,7 +1380,7 @@ Academic guidance programs, Best education platform for students">
         </div>
 
         <!-- Mobile Menu Toggle Button (Preserves toggleMobileMenu hook) -->
-        <button type="button" class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu" aria-expanded="false">
+        <button type="button" class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobileMenu">
           <span class="hamburger-line"></span>
           <span class="hamburger-line"></span>
           <span class="hamburger-line"></span>
@@ -1533,11 +1402,11 @@ Academic guidance programs, Best education platform for students">
               <a href="careers.html" class="nav-link">Career</a>
             </li>
             <li class="nav-item"><a href="blogs.html" class="nav-link">Blogs</a></li>
-            <li class="nav-item">
-              <a href="become-a-member.html" class="nav-link btn-partner">Become a Member</a>
+            <li class="nav-item" style="margin-top: 6px;">
+              <a href="become-a-member.html" class="btn-pill btn-secondary-white" style="width: 100%; text-align: center;">Become a Member</a>
             </li>
             <li class="nav-item">
-              <a href="donate.html" class="nav-link btn-donate">Donate Us</a>
+              <a href="donate.html" class="btn-pill btn-primary-gradient" style="width: 100%; text-align: center;">Donate Us</a>
             </li>
           </ul>
         </div>
@@ -1986,7 +1855,7 @@ Academic guidance programs, Best education platform for students">
           <a href="#financial-aid" class="index-pill">Financial Aid</a>
           <a href="#technical-training" class="index-pill">Technical Training</a>
           <a href="#diploma-courses" class="index-pill">Diploma Courses</a>
-          <a href="#video-ads" class="index-pill">Video Ads</a>
+          <a href="#video-ads" class="index-pill">Testimonials</a>
         </div>
       </div>
     </nav>
@@ -2317,7 +2186,7 @@ Academic guidance programs, Best education platform for students">
 
   <!-- Video Section -->
   <section class="video-carousel" id="video-ads">
-      <h2>Our Video Ads</h2>
+      <h2>Testimonials</h2>
       <div class="carousel-track">
         <div class="video-item">
           <video preload="metadata" playsinline>

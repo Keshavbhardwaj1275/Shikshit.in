@@ -406,61 +406,307 @@
   }
 }
 
-/* Tablet & Mobile Header/Nav (<= 992px) */
+/* Tablet & Mobile Header/Nav (<= 992px) - Uniform across ALL pages */
 @media (max-width: 992px) {
-  .shikshit-header {
-    top: 12px;
-    padding: 0 16px;
+  .shikshit-header,
+  body.page-products .shikshit-header,
+  body.careers-page .shikshit-header,
+  .careers-page .shikshit-header,
+  body.page-member .shikshit-header,
+  body.page-donate .shikshit-header {
+    position: sticky !important;
+    top: 10px !important;
+    z-index: 1000 !important;
+    width: 100% !important;
+    padding: 0 16px !important;
+    margin: 0 !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    pointer-events: auto !important;
   }
 
-  .shikshit-navbar {
-    padding: 8px 18px;
+  .shikshit-navbar,
+  body.page-products .shikshit-navbar,
+  body.careers-page .shikshit-navbar,
+  .careers-page .shikshit-navbar,
+  body.page-member .shikshit-navbar,
+  body.page-donate .shikshit-navbar {
+    position: relative !important;
+    max-width: var(--container-max, 1200px) !important;
+    margin: 0 auto !important;
+    margin-inline: auto !important;
+    padding: 8px 18px !important;
+    min-height: 60px !important;
+    height: auto !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    background: rgba(255, 255, 255, 0.92) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border-radius: var(--radius-pill, 999px) !important;
+    border: 1px solid rgba(124, 58, 237, 0.12) !important;
+    box-shadow: 0 10px 30px rgba(11, 11, 59, 0.08) !important;
+    box-sizing: border-box !important;
+  }
+
+  .shikshit-brand,
+  body.page-products .shikshit-brand,
+  body.careers-page .shikshit-brand,
+  .careers-page .shikshit-brand,
+  body.page-member .shikshit-brand,
+  body.page-donate .shikshit-brand {
+    display: flex !important;
+    align-items: center !important;
+    text-decoration: none !important;
+    height: 48px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .shikshit-logo,
+  body.page-products .shikshit-logo,
+  body.careers-page .shikshit-logo,
+  .careers-page .shikshit-logo,
+  body.page-member .shikshit-logo,
+  body.page-donate .shikshit-logo {
+    height: 90px !important;
+    width: auto !important;
+    max-width: 170px !important;
+    margin: -20px 0 !important;
+    object-fit: contain !important;
+    display: block !important;
+    filter: drop-shadow(0 2px 4px rgba(11, 11, 59, 0.08)) !important;
+    transition: transform 0.25s ease !important;
   }
 
   .shikshit-nav-menu,
-  .shikshit-nav-actions {
+  .shikshit-nav-actions,
+  body.page-products .shikshit-nav-menu,
+  body.page-products .shikshit-nav-actions,
+  body.careers-page .shikshit-nav-menu,
+  body.careers-page .shikshit-nav-actions,
+  .careers-page .shikshit-nav-menu,
+  .careers-page .shikshit-nav-actions,
+  body.page-member .shikshit-nav-menu,
+  body.page-member .shikshit-nav-actions,
+  body.page-donate .shikshit-nav-menu,
+  body.page-donate .shikshit-nav-actions {
     display: none !important;
   }
 
-  .mobile-menu-toggle {
+  .mobile-menu-toggle,
+  body.page-products .mobile-menu-toggle,
+  body.careers-page .mobile-menu-toggle,
+  .careers-page .mobile-menu-toggle,
+  body.page-member .mobile-menu-toggle,
+  body.page-donate .mobile-menu-toggle {
     display: flex !important;
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 999px !important;
+    background: var(--lav-50, #F7F5FF) !important;
+    border: 1px solid rgba(124, 58, 237, 0.14) !important;
+    padding: 8px !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 5px !important;
+    cursor: pointer !important;
+    z-index: 1001 !important;
+    margin: 0 !important;
+    box-shadow: none !important;
   }
 
-  .shikshit-logo {
-    height: 94px !important;
-    margin: -22px 0 !important;
-    width: auto !important;
+  .hamburger-line,
+  body.page-products .mobile-menu-toggle .hamburger-line,
+  body.careers-page .mobile-menu-toggle .hamburger-line,
+  body.page-member .mobile-menu-toggle .hamburger-line,
+  body.page-donate .mobile-menu-toggle .hamburger-line {
+    width: 22px !important;
+    height: 2.5px !important;
+    background-color: var(--navy, #0B0B3B) !important;
+    border-radius: 2px !important;
+    margin: 0 !important;
+    transition: all 0.25s ease !important;
+  }
+
+  .mobile-menu-toggle.active .hamburger-line:nth-child(1) {
+    transform: translateY(7.5px) rotate(45deg) !important;
+  }
+
+  .mobile-menu-toggle.active .hamburger-line:nth-child(2) {
+    opacity: 0 !important;
+    transform: scaleX(0) !important;
+  }
+
+  .mobile-menu-toggle.active .hamburger-line:nth-child(3) {
+    transform: translateY(-7.5px) rotate(-45deg) !important;
+  }
+
+  .mobile-menu,
+  body.page-products .mobile-menu,
+  body.careers-page .mobile-menu,
+  body.page-member .mobile-menu,
+  body.page-donate .mobile-menu {
+    position: absolute !important;
+    top: calc(100% + 12px) !important;
+    left: 16px !important;
+    right: 16px !important;
+    background: rgba(255, 255, 255, 0.98) !important;
+    backdrop-filter: blur(25px) !important;
+    -webkit-backdrop-filter: blur(25px) !important;
+    border-radius: 28px !important;
+    border: 1px solid rgba(124, 58, 237, 0.12) !important;
+    box-shadow: 0 20px 50px rgba(11, 11, 59, 0.16) !important;
+    padding: 24px 20px !important;
+    z-index: 1001 !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transform: translateY(-10px) !important;
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s !important;
+    pointer-events: none !important;
+    box-sizing: border-box !important;
+  }
+
+  .mobile-menu.active,
+  body.page-products .mobile-menu.active,
+  body.careers-page .mobile-menu.active,
+  body.page-member .mobile-menu.active,
+  body.page-donate .mobile-menu.active {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(0) !important;
+    pointer-events: auto !important;
+  }
+
+  .mobile-nav,
+  body.page-products .mobile-nav,
+  body.careers-page .mobile-nav,
+  body.page-member .mobile-nav,
+  body.page-donate .mobile-nav {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .mobile-nav .nav-link,
+  body.page-products .mobile-nav .nav-link,
+  body.careers-page .mobile-nav .nav-link,
+  body.page-member .mobile-nav .nav-link,
+  body.page-donate .mobile-nav .nav-link {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 13px 20px !important;
+    border-radius: var(--radius-pill, 999px) !important;
+    font-weight: 700 !important;
+    font-size: 15.5px !important;
+    color: var(--navy, #0B0B3B) !important;
+    text-decoration: none !important;
+    background: var(--lav-50, #F7F5FF) !important;
+    border: 1px solid rgba(124, 58, 237, 0.08) !important;
+    transition: background 0.2s ease, color 0.2s ease !important;
+  }
+
+  .mobile-nav .nav-link:hover,
+  .mobile-nav .nav-link.active,
+  body.page-products .mobile-nav .nav-link:hover,
+  body.page-products .mobile-nav .nav-link.active,
+  body.careers-page .mobile-nav .nav-link:hover,
+  body.careers-page .mobile-nav .nav-link.active,
+  body.page-member .mobile-nav .nav-link:hover,
+  body.page-member .mobile-nav .nav-link.active,
+  body.page-donate .mobile-nav .nav-link:hover,
+  body.page-donate .mobile-nav .nav-link.active {
+    background: var(--lav-100, #EDE9FE) !important;
+    color: var(--violet, #7C3AED) !important;
+  }
+
+  .mobile-nav .btn-secondary-white {
+    background: #FFFFFF !important;
+    color: var(--navy, #0B0B3B) !important;
+    border: 1.5px solid rgba(124, 58, 237, 0.18) !important;
+    box-shadow: 0 4px 14px rgba(124, 58, 237, 0.08) !important;
+  }
+
+  .mobile-nav .btn-primary-gradient {
+    background: var(--signature-gradient, linear-gradient(135deg, #C026D3 0%, #7C3AED 50%, #4C1D95 100%)) !important;
+    color: #FFFFFF !important;
+    border: none !important;
+    box-shadow: 0 8px 24px rgba(192, 38, 211, 0.28) !important;
   }
 }
 
-/* Small Mobile (<= 480px) */
+/* Small Mobile (<= 480px) - Consistent across all pages */
 @media (max-width: 480px) {
-  .shikshit-header {
-    top: 8px;
-    padding: 0 10px;
+  .shikshit-header,
+  body.page-products .shikshit-header,
+  body.careers-page .shikshit-header,
+  .careers-page .shikshit-header,
+  body.page-member .shikshit-header,
+  body.page-donate .shikshit-header {
+    top: 10px !important;
+    padding: 0 12px !important;
   }
 
-  .shikshit-navbar {
-    padding: 6px 14px;
-    border-radius: 20px;
+  .shikshit-navbar,
+  body.page-products .shikshit-navbar,
+  body.careers-page .shikshit-navbar,
+  .careers-page .shikshit-navbar,
+  body.page-member .shikshit-navbar,
+  body.page-donate .shikshit-navbar {
+    padding: 8px 16px !important;
+    min-height: 58px !important;
+    border-radius: var(--radius-pill, 999px) !important;
   }
 
-  .shikshit-logo {
-    height: 84px !important;
-    margin: -19px 0 !important;
-    width: auto !important;
+  .shikshit-logo,
+  body.page-products .shikshit-logo,
+  body.careers-page .shikshit-logo,
+  .careers-page .shikshit-logo,
+  body.page-member .shikshit-logo,
+  body.page-donate .shikshit-logo {
+    height: 76px !important;
+    margin: -11px 0 !important;
+    max-width: 155px !important;
   }
 
-  .mobile-menu {
-    left: 10px;
-    right: 10px;
-    padding: 16px;
-    border-radius: 20px;
+  .mobile-menu-toggle,
+  body.page-products .mobile-menu-toggle,
+  body.careers-page .mobile-menu-toggle,
+  .careers-page .mobile-menu-toggle,
+  body.page-member .mobile-menu-toggle,
+  body.page-donate .mobile-menu-toggle {
+    width: 42px !important;
+    height: 42px !important;
   }
 
-  .mobile-nav .nav-link {
-    padding: 11px 16px;
-    font-size: 15px;
+  .mobile-menu,
+  body.page-products .mobile-menu,
+  body.careers-page .mobile-menu,
+  body.page-member .mobile-menu,
+  body.page-donate .mobile-menu {
+    left: 8px !important;
+    right: 8px !important;
+    padding: 20px 16px !important;
+    border-radius: 24px !important;
+  }
+
+  .mobile-nav .nav-link,
+  body.page-products .mobile-nav .nav-link,
+  body.careers-page .mobile-nav .nav-link,
+  body.page-member .mobile-nav .nav-link,
+  body.page-donate .mobile-nav .nav-link {
+    padding: 12px 18px !important;
+    font-size: 14.5px !important;
   }
 }
 
@@ -607,6 +853,14 @@
 
 .video-item video {
   pointer-events: auto;
+  object-fit: cover;
+  object-position: center top;
+}
+
+:fullscreen video,
+:-webkit-full-screen video {
+  object-fit: contain !important;
+  object-position: center center !important;
 }
 
 /* Click overlay across the video for play/pause toggle */

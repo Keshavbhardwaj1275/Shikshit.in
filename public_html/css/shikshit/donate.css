@@ -600,9 +600,6 @@ body.page-donate .intervention-card {
   border-radius: 26px !important;
   padding: 2.2rem 1.75rem 2rem !important;
   box-shadow: 0 12px 36px rgba(124, 58, 237, 0.07), 0 2px 6px rgba(11, 11, 59, 0.02) !important;
-  transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.38s cubic-bezier(0.16, 1, 0.3, 1),
-              border-color 0.32s ease !important;
   text-align: center !important;
   display: flex !important;
   flex-direction: column !important;
@@ -612,7 +609,28 @@ body.page-donate .intervention-card {
   overflow: hidden !important;
   height: 100% !important;
   box-sizing: border-box !important;
+  opacity: 0;
+  transform: translateY(46px) scale(0.96);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.38s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.32s ease !important;
+  will-change: transform, opacity;
 }
+
+body.page-donate .intervention-card.is-inview {
+  opacity: 1 !important;
+  transform: translateY(var(--scroll-shift, 0px)) scale(1) !important;
+}
+
+body.page-donate .intervention-card:nth-child(1) { transition-delay: 0.04s; }
+body.page-donate .intervention-card:nth-child(2) { transition-delay: 0.12s; }
+body.page-donate .intervention-card:nth-child(3) { transition-delay: 0.20s; }
+body.page-donate .intervention-card:nth-child(4) { transition-delay: 0.28s; }
+body.page-donate .intervention-card:nth-child(5) { transition-delay: 0.16s; }
+body.page-donate .intervention-card:nth-child(6) { transition-delay: 0.24s; }
+body.page-donate .intervention-card:nth-child(7) { transition-delay: 0.32s; }
+body.page-donate .intervention-card:nth-child(8) { transition-delay: 0.40s; }
 
 /* Top Glow Shimmer on Card */
 body.page-donate .intervention-card-glow {
@@ -626,8 +644,8 @@ body.page-donate .intervention-card-glow {
   transition: opacity 0.3s ease;
 }
 
-body.page-donate .intervention-card:hover {
-  transform: translateY(-8px) scale(1.015) !important;
+body.page-donate .intervention-card.is-inview:hover {
+  transform: translateY(-10px) scale(1.02) !important;
   box-shadow: 0 24px 54px rgba(124, 58, 237, 0.18), 0 6px 18px rgba(11, 11, 59, 0.04) !important;
   border-color: rgba(124, 58, 237, 0.36) !important;
 }
@@ -723,9 +741,15 @@ body.page-donate .intervention-card:hover .intervention-card-accent {
 /* ==========================================================================
    6. PURPOSEFUL MOTION & ACCESSIBLE SCROLL REVEALS
    ========================================================================= */
-body.page-donate .scroll-reveal-item {
+body.page-donate .scroll-reveal-ready {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+body.page-donate .scroll-reveal-ready.is-visible {
   opacity: 1 !important;
-  visibility: visible !important;
+  transform: translateY(0) !important;
 }
 
 body.page-donate .scroll-reveal-ready {

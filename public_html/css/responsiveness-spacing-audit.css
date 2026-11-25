@@ -1,0 +1,282 @@
+/* Cross-page responsiveness and section-rhythm audit */
+:root {
+  --section-rhythm: clamp(38px, 4.5vw, 54px);
+}
+
+html,
+body {
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+body {
+  min-width: 0;
+}
+
+img,
+picture,
+video,
+canvas,
+svg,
+iframe,
+embed,
+object {
+  max-width: 100%;
+}
+
+main,
+header,
+footer,
+section,
+article,
+aside,
+nav,
+.container,
+.shikshit-container {
+  min-width: 0;
+  width: 100%;
+}
+
+.shikshit-container {
+  max-width: min(var(--container-max, 1200px), 100%);
+  padding-left: clamp(16px, 4vw, 24px);
+  padding-right: clamp(16px, 4vw, 24px);
+}
+
+.shikshit-section {
+  padding-top: var(--section-rhythm);
+  padding-bottom: var(--section-rhythm);
+}
+
+.shikshit-section-header {
+  margin-bottom: clamp(24px, 3.5vw, 36px);
+}
+
+.shikshit-section-subtitle {
+  margin-top: clamp(8px, 1.5vw, 14px);
+}
+
+.shikshit-navbar,
+.navbar,
+nav,
+header {
+  max-width: 100%;
+}
+
+.shikshit-nav-menu,
+.nav-menu,
+.cta,
+.btn-row,
+.form-row,
+.grid,
+[class*="grid"] {
+  min-width: 0;
+}
+
+.shikshit-nav-actions,
+.cta,
+.btn-row,
+.button-group,
+.hero-actions {
+  flex-wrap: wrap;
+}
+
+.btn-pill,
+button,
+.button,
+a.button,
+.cta a,
+input,
+select,
+textarea {
+  max-width: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+li,
+dt,
+dd,
+label,
+button,
+.card,
+.tile,
+.panel {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+/* Common editorial sections */
+.intro-statement-section {
+  padding-top: clamp(36px, 6vw, 56px);
+  padding-bottom: clamp(36px, 6vw, 56px);
+}
+
+.bands {
+  margin-top: clamp(24px, 4vw, 40px);
+}
+
+.footer,
+.shikshit-footer,
+.site-footer,
+footer {
+  margin-top: 0;
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --section-rhythm: clamp(36px, 7vw, 56px);
+  }
+
+  .shikshit-header {
+    top: 10px;
+  }
+
+  .shikshit-navbar {
+    border-radius: 28px;
+  }
+
+  .shikshit-section-header {
+    margin-bottom: 28px;
+  }
+
+  .footer-grid,
+  .shikshit-footer-grid,
+  [class*="footer-grid"] {
+    row-gap: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --section-rhythm: 40px;
+  }
+
+  .shikshit-section {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+
+  .shikshit-section-header {
+    margin-bottom: 24px;
+  }
+
+  .shikshit-header {
+    top: 8px;
+  }
+
+  .shikshit-navbar {
+    min-height: 64px;
+    padding: 8px 14px;
+  }
+
+  .shikshit-logo {
+    height: 78px;
+  }
+
+  .hero,
+  .hero-section,
+  [class*="hero"] {
+    min-width: 0;
+  }
+
+  .hero h1,
+  .hero-section h1 {
+    text-wrap: balance;
+  }
+
+  .cta,
+  .hero-actions,
+  .button-group {
+    gap: 10px;
+  }
+
+  .btn-pill,
+  .btn-lg,
+  .cta a,
+  .button {
+    min-height: 44px;
+  }
+
+  .card,
+  .tile,
+  .panel,
+  .grid > *,
+  [class*="grid"] > * {
+    min-width: 0;
+  }
+
+  .intro-statement-section {
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --section-rhythm: 32px;
+  }
+
+  .shikshit-container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .shikshit-section {
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
+
+  .shikshit-section-header {
+    margin-bottom: 20px;
+  }
+
+  .shikshit-navbar {
+    min-height: 58px;
+    padding: 6px 10px;
+  }
+
+  .shikshit-logo {
+    height: 68px;
+  }
+
+  .cta,
+  .hero-actions,
+  .button-group {
+    width: 100%;
+  }
+
+  .cta > *,
+  .hero-actions > *,
+  .button-group > * {
+    max-width: 100%;
+  }
+
+  .bands {
+    margin-top: 20px;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 500px) {
+  .shikshit-header {
+    position: relative;
+  }
+
+  .shikshit-section,
+  .hero-section {
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+}

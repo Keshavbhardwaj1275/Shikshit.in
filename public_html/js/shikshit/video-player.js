@@ -240,7 +240,7 @@
   // Carousel Marquee Setup
   function initCarousel(track, speedPxPerSec) {
     if (!track) return;
-    speedPxPerSec = speedPxPerSec || 35;
+    speedPxPerSec = parseFloat(track.dataset.speed) || speedPxPerSec || 35;
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -251,6 +251,14 @@
       originalItems.forEach(function(item) {
         const clone = item.cloneNode(true);
         delete clone.dataset.playerInitialized;
+        const innerFrame = clone.querySelector('.video-aspect-frame');
+        if (innerFrame) {
+          delete innerFrame.dataset.playerInitialized;
+          const oldOverlay = innerFrame.querySelector('.video-click-overlay');
+          if (oldOverlay) oldOverlay.remove();
+          const oldControls = innerFrame.querySelector('.custom-video-controls');
+          if (oldControls) oldControls.remove();
+        }
         track.appendChild(clone);
       });
     }

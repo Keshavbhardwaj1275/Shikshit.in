@@ -34,8 +34,8 @@
   ) !important;
   border-radius: 48px 48px 0 0 !important;
   border-top: var(--hairline-border, var(--shikshit-footer-hairline)) !important;
-  padding: 70px 0 32px !important;
-  margin-top: 60px !important;
+  padding: 48px 0 28px !important;
+  margin-top: 20px !important;
   position: relative !important;
   z-index: 2 !important;
   font-family: var(--font-body, var(--shikshit-footer-font)) !important;
@@ -70,7 +70,7 @@
   display: grid !important;
   grid-template-columns: 1.5fr 1fr 1fr 1.2fr !important;
   gap: 40px !important;
-  margin-bottom: 48px !important;
+  margin-bottom: 32px !important;
   align-items: start !important;
 }
 
@@ -275,62 +275,122 @@
 }
 
 /* Mobile (max-width: 768px) */
-/* Mobile (max-width: 768px) */
 @media (max-width: 768px) {
   .footer-editorial {
-    padding: 48px 0 28px !important;
-    border-radius: 32px 32px 0 0 !important;
-    margin-top: 40px !important;
+    background: #F8F7FC !important;
+    padding: 30px 0 18px !important;
+    border-radius: 24px 24px 0 0 !important;
+    margin-top: 24px !important;
   }
 
   .footer-editorial .footer-grid {
-    grid-template-columns: 1fr !important;
-    gap: 28px !important;
-    margin-bottom: 32px !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    column-gap: 18px !important;
+    row-gap: 18px !important;
+    margin-bottom: 20px !important;
+  }
+
+  .footer-editorial .footer-brand-col {
+    grid-column: 1 / -1 !important;
+    display: grid !important;
+    grid-template-columns: 76px minmax(0, 1fr) !important;
+    column-gap: 14px !important;
+    align-items: center !important;
+    text-align: left !important;
   }
 
   .footer-editorial .footer-brand {
-    height: auto !important;
-    margin: 0 0 14px 0 !important;
+    margin: 0 !important;
   }
 
   .footer-editorial .footer-logo,
   .footer-editorial img[src*="sikshitlogo"] {
-    height: 155px !important;
+    height: 76px !important;
     width: auto !important;
     max-width: 100% !important;
-    margin: -43px 0 -41px -10px !important;
+    margin: 0 !important;
   }
 
   .footer-editorial .footer-brand-desc,
   .footer-editorial .footer-grid > div:first-child p {
-    font-size: 14px !important;
-    line-height: 1.6 !important;
+    font-size: 13px !important;
+    line-height: 1.5 !important;
     margin-top: 0 !important;
     max-width: 100% !important;
+  }
+
+  .footer-editorial .footer-grid > .footer-col {
+    grid-column: 1 / -1 !important;
+    border-top: 1px solid rgba(11, 11, 59, 0.1) !important;
+    padding-top: 15px !important;
+  }
+
+  .footer-editorial .footer-grid > .footer-col:nth-child(2) ul,
+  .footer-editorial .footer-grid > .footer-col:nth-child(3) ul {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    column-gap: 18px !important;
+    row-gap: 9px !important;
+  }
+
+  .footer-editorial .footer-col h4 {
+    font-size: 14px !important;
+    margin-bottom: 11px !important;
+  }
+
+  .footer-editorial .footer-col ul {
+    gap: 9px !important;
+  }
+
+  .footer-editorial .footer-col ul li a,
+  .footer-editorial .footer-col a {
+    font-size: 13.5px !important;
+    line-height: 1.4 !important;
+  }
+
+  .footer-editorial .footer-col p {
+    font-size: 13px !important;
+    line-height: 1.55 !important;
+    margin-bottom: 7px !important;
+  }
+
+  .footer-editorial .footer-col p a {
+    display: inline !important;
+    overflow-wrap: break-word !important;
+    word-break: normal !important;
+  }
+
+  .footer-editorial .footer-col .btn-primary-gradient {
+    margin-top: 2px !important;
+  }
+
+  .footer-editorial .footer-bottom {
+    padding-top: 14px !important;
+    font-size: 11.5px !important;
+    line-height: 1.5 !important;
   }
 }
 
 /* Small Mobile (max-width: 480px) */
 @media (max-width: 480px) {
-  .footer-editorial .footer-brand {
-    height: auto !important;
-    margin: 0 0 12px 0 !important;
+  .footer-editorial {
+    padding-top: 26px !important;
+  }
+
+  .footer-editorial .footer-grid {
+    column-gap: 14px !important;
+    row-gap: 15px !important;
   }
 
   .footer-editorial .footer-logo,
   .footer-editorial img[src*="sikshitlogo"] {
-    height: 138px !important;
+    height: 82px !important;
     width: auto !important;
-    max-width: 100% !important;
-    margin: -38px 0 -36px -8px !important;
   }
 
-  .footer-editorial .footer-brand-desc,
-  .footer-editorial .footer-grid > div:first-child p {
-    font-size: 13.5px !important;
-    line-height: 1.55 !important;
-    margin-top: 0 !important;
+  .footer-editorial .footer-brand-col {
+    grid-template-columns: 80px minmax(0, 1fr) !important;
+    column-gap: 12px !important;
   }
 }
 

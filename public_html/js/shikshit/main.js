@@ -41,8 +41,8 @@
   /* ------------------------------------------------------------------------
      2. Global Mobile Menu Toggle (Preserving existing toggleMobileMenu())
      ------------------------------------------------------------------------ */
-  function toggleMobileMenu(e) {
-    if (e) {
+    function toggleMobileMenu(e) {
+    if (e && typeof e.preventDefault === 'function') {
       e.preventDefault();
       e.stopPropagation();
     }
@@ -54,11 +54,17 @@
     const isActive = mobileMenu.classList.contains('active');
     if (isActive) {
       mobileMenu.classList.remove('active');
-      if (toggleButton) toggleButton.classList.remove('active');
+      if (toggleButton) {
+        toggleButton.classList.remove('active');
+        toggleButton.setAttribute('aria-expanded', 'false');
+      }
       document.body.style.overflow = '';
     } else {
       mobileMenu.classList.add('active');
-      if (toggleButton) toggleButton.classList.add('active');
+      if (toggleButton) {
+        toggleButton.classList.add('active');
+        toggleButton.setAttribute('aria-expanded', 'true');
+      }
     }
   }
 
@@ -69,9 +75,29 @@
     const mobileMenu = document.getElementById('mobileMenu');
     const toggleButton = document.querySelector('.mobile-menu-toggle');
     if (mobileMenu && mobileMenu.classList.contains('active')) {
-      if (!mobileMenu.contains(e.target) && !toggleButton.contains(e.target)) {
+      if (!mobileMenu.contains(e.target) && (!toggleButton || !toggleButton.contains(e.target))) {
         mobileMenu.classList.remove('active');
-        if (toggleButton) toggleButton.classList.remove('active');
+        if (toggleButton) {
+          toggleButton.classList.remove('active');
+          toggleButton.setAttribute('aria-expanded', 'false');
+        }
+        document.body.style.overflow = '';
+      }
+    }
+  });
+
+  // Close mobile menu on Escape key
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      const mobileMenu = document.getElementById('mobileMenu');
+      const toggleButton = document.querySelector('.mobile-menu-toggle');
+      if (mobileMenu && mobileMenu.classList.contains('active')) {
+        mobileMenu.classList.remove('active');
+        if (toggleButton) {
+          toggleButton.classList.remove('active');
+          toggleButton.setAttribute('aria-expanded', 'false');
+        }
+        document.body.style.overflow = '';
       }
     }
   });
@@ -90,16 +116,21 @@
         if (entry.isIntersecting) {
           const el = entry.target;
           const target = parseFloat(el.getAttribute('data-counter-target'));
+          if (isNaN(target)) return;
+
           const prefix = el.getAttribute('data-counter-prefix') || '';
           const suffix = el.getAttribute('data-counter-suffix') || '';
           const isDecimal = target % 1 !== 0;
-          const duration = 1600;
+          const duration = parseFloat(el.getAttribute('data-counter-duration')) || 1800;
           const startTime = performance.now();
+
+          // Immediately unobserve so animation triggers exactly once
+          observer.unobserve(el);
 
           function updateNum(currentTime) {
             const elapsed = currentTime - startTime;
             const progress = Math.min(elapsed / duration, 1);
-            // Ease out quart
+            // Ease-out quart for smooth, natural deceleration
             const ease = 1 - Math.pow(1 - progress, 4);
             const current = target * ease;
 
@@ -117,10 +148,12 @@
           }
 
           requestAnimationFrame(updateNum);
-          observer.unobserve(el);
         }
       });
-    }, { threshold: 0.35 });
+    }, {
+      threshold: 0.05,
+      rootMargin: '0px 0px -10px 0px'
+    });
 
     counterElements.forEach(function (el) {
       counterObserver.observe(el);
@@ -144,8 +177,8 @@
         }
       });
     }, {
-      threshold: 0.12,
-      rootMargin: '0px 0px -40px 0px'
+      threshold: 0.06,
+      rootMargin: '0px 0px -15px 0px'
     });
 
     revealElements.forEach(function (el) {
@@ -233,9 +266,15 @@
   /* ------------------------------------------------------------------------
      Initialize on DOM Ready
      ------------------------------------------------------------------------ */
-  document.addEventListener('DOMContentLoaded', function () {
+  function initAll() {
     initCounters();
     initScrollReveal();
     initCreativeHero();
-  });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAll);
+  } else {
+    initAll();
+  }
 })();
